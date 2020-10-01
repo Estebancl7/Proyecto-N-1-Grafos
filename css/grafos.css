@@ -1,0 +1,12 @@
+#grafos .marginx{
+    /*width: 1000px !important;*/
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+#grafos .dividerg{
+    border-bottom: 2px solid black;
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+}

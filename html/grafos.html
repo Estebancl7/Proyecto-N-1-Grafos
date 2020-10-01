@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!--Conexion Css -->
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/grafos.css">
     <!--Font awesome-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Google fonts -->
@@ -45,7 +46,51 @@
         </div>
     </nav>
 
-    <h2>Matriz de Adyacencia</h2>
+
+<section id="grafos">
+    <div class="container border border-dark mt-5 py-2 my-5">
+        <h1 class="mx-5 text-center">Area de Trabajo</h1>
+        <h1 class="dividerg mx-5"></h1>
+        <div class="row d-flex">
+            <div class="container mx-5">
+                <p class="text-center">En esta area podras ingresar grafos con sus distintas caracteristicas, por ejemplo puedes elegir tu tipo de grafo
+                    , ingresar vertices, aristas, para finalmente mediante un analisis, poder obtener: la matriz de adyacencia para tu grafo, entre otras cosas.
+                </p>    
+            </div>
+        </div>
+
+        <div class="container">
+            <h3 class="text-center">Instrucciones previas.</h3>
+            <div class="row pt-3 justify-content-center">
+                <div class="col-md-6 mx-5">
+                    <p><b>1.</b> Elige el tipo de grafo que ingresaras:<p>    
+                    <select class="form-control " id="tipoGrafo">
+                        <option value="Simple">Grafo Simple</option>
+                        <option value="Dirigido">Grafo Dirigido</option>
+                    </select>     
+                </div>
+                <div class="col-md-6">
+                    <div class="row d-flex justify-content-center my-2">
+                        <a onclick="draw()" id="btnComenzar" class="btn btn-outline-light px-2" style="text-align: center; max-width: 850px;">Ingresa un Grafo</a> 
+                    </div>
+                </div>                
+                <div class="col-md-6 mx-5">
+                    <p><b>2.</b>Comienza a ingresar tus grafos<p>
+                    <div class="container border border-dark">
+                        <h1>ACA ES DONDE SE DEBEN INGRESAR POR PANTALLA CADA UNO DE LOS GRAFOS</h1>
+                    </div>    
+                </div>
+                <div class="col-md-12">
+                    <h3 class="text-center mt-4">Analisis de resultados</h3>
+                    <h1 class="dividerg"></h1>
+                </div>    
+            </div>    
+        </div>
+        
+    </div>
+</section>
+
+    <!--<h2>Matriz de Adyacencia</h2>
     <input type="option">
     <label for="option"></label>
 
@@ -56,7 +101,7 @@
     <h2>Camino mas rapido</h2>
 
     <h2></h2>
-
+    -->
 
 </body>
 

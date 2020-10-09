@@ -65,10 +65,11 @@
                     <p class="text-center">En esta área podrás ingresar grafos con sus distintas caracteristicas, por ejemplo puedes elegir tu tipo de grafo , ingresar vertices, aristas, para finalmente mediante un analisis, poder obtener:
                     </p>
                     <div class="row justify-content-center">
-                        <p><i class="fas fa-check-circle"></i> Matriz de adyacencia<br>
-                            <i class="fas fa-check-circle"></i> Matriz de Caminos <br>
-                            <i class="fas fa-check-circle"></i> Grafo Euleriano o Hamiltoniano <br>
-                            <i class="fas fa-check-circle"></i> Camino más rapido
+                        <p>
+                            <em class="fas fa-check-circle"></em> Matriz de adyacencia<br>
+                            <em class="fas fa-check-circle"></em> Matriz de Caminos <br>
+                            <em class="fas fa-check-circle"></em> Grafo Euleriano o Hamiltoniano <br>
+                            <em class="fas fa-check-circle"></em> Camino más rapido<br>
                         </p>
                     </div>
                 </div>
@@ -80,8 +81,8 @@
                 <h3 class="text-center">Instrucciones previas.</h3>
                 <div class="row pt-3 justify-content-center">
                     <div class="col-md-6 mx-5">
-                        <p><b>1.</b> Elige el tipo de grafo que ingresaras:</p>
-                        <select class="form-control " id="tipoGrafo">
+                        <p><strong>1.</strong> Elige el tipo de grafo que ingresaras:</p>
+                        <select class="form-control " id="eleccionGrafo">
                         <option value="Simple">Grafo Simple</option>
                         <option value="Dirigido">Grafo Dirigido</option>
                         </select>
@@ -98,7 +99,7 @@
 
 
                     <div class="col-md-6 mx-5" id="">
-                        <p><b>2.</b>Comienza a ingresar tus grafos:</p>
+                        <p><strong>2.</strong>Comienza a ingresar tus grafos:</p>
                         <div class="col-12 my-2  shadow" id="resultado"></div>
 
 
@@ -111,7 +112,7 @@
                                     <td><input id="node-id" class="form-control" placeholder="Ingresa un ID" /></td>
                                 </tr>
                                 <tr style="display: none;">
-                                    <th id="th-nombre">Nombre</th>
+                                    <th id="th-nombre ">Nombre</th>
                                     <td><input id="node-label" class="form-control" placeholder="Nombre" /></td>
                                 </tr>
                             </table>
@@ -126,7 +127,7 @@
                             <table style="margin:center;">
                                 <caption></caption>
                                 <tr>
-                                    <td><input type="number" id="edge-label" class="form-control" min="0 " placeholder="Ingresa el peso del grafo" /></td>
+                                    <td><input type="number" id="edge-label" class="form-control" min="0 " placeholder="Ingresa el peso del grafo " /></td>
                                 </tr>
                             </table>
 
@@ -136,13 +137,31 @@
                     </div>
 
 
+                    <div class="col-md-12">
+                        <h3 class="text-center mt-4">Analisis de resultados</h3>
+                        <h1 class="dividerg"></h1>
+                        <div class="row">
+                            <div id="matrizAdy" class="col-4">
+
+                                <h1>Matriz de Adyacencia</h1>
+                                <a onclick="" class="btn btn-outline-light px-2">Mostrar Matriz</a>
+
+                            </div>
+                            <div class="col-4">
+                                <h1>Matriz de caminos</h1>
+                                <a href=""></a>
+                            </div>
+                            <div class="col-4">
+                                <h1>Matriz de caminos</h1>
+                            </div>
+
+                        </div>
 
 
+                    </div>
+
                 </div>
-                <div class="col-md-12">
-                    <h3 class="text-center mt-4">Analisis de resultados</h3>
-                    <h1 class="dividerg"></h1>
-                </div>
+
 
             </div>
         </div>
@@ -161,7 +180,7 @@
                     <div class="row my-1">
                         <div class="col d-flex justify-content-center">
                             <a href="# " class="text-white">
-                                <i class="fab fa-github"></i>
+                                <em class="fab fa-github"></em>
                             </a>
                         </div>
                     </div>
@@ -181,14 +200,15 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin="anonymous "></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js " integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI " crossorigin="anonymous "></script>
-<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js "></script>
-<script src="https://kit.fontawesome.com/c8152ea011.js " crossorigin="anonymous "></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+<script src="https://kit.fontawesome.com/c8152ea011.js" crossorigin="anonymous"></script>
 
-<script type="text/javascript " src="/js/grafosDraw.js "></script>
-<script type="text/javascript " src="/dist/vis.js "></script>
+<script type="text/javascript " src="/js/grafosDraw.js"></script>
+<script type="text/javascript " src="/dist/vis.js"></script>
 
 
 </html>
+</embra

@@ -15,7 +15,7 @@ var arista_llegada = [];
 
 var peso = [];
 var pesoAux = [];
-var mAdyacencia = [];
+var matrizAdyacencia = [];
 var mCaminos = []
 var a_desde = [];
 var a_hacia = [];
@@ -56,16 +56,14 @@ function draw() {
             },
             addEdge: function(data, callback) {
                 if (data.from == data.to) {
-                    var r = confirm(`
-            Si conectas un vertice a si mismo crearas un bucle , ¿estas seguro?
-          `);
+                    var r = confirm(`Si conectas un vertice a si mismo crearas un bucle , ¿estas seguro?`);
                     if (r != true) {
                         callback(null);
                         return;
                     }
                 }
-                var tipoGrafo = document.querySelector("#tipoGrafo").value;
-                if (tipoGrafo === 'Dirigido') {
+                var eleccionGrafo = document.querySelector("#eleccionGrafo").value;
+                if (eleccionGrafo === 'Dirigido') {
                     var options = {
                         edges: {
                             arrows: 'to',
@@ -157,6 +155,22 @@ function init() {
 }
 
 
+/* Saber si es dirigido o no*/
+
+
+function encontrar(columna, fila) {
+    var eleccionGrafo = document.querySelector("#eleccionGrafo").value;
+    for (let i = 1; i <= (arista_origen.length); i++) {
+        if (eleccionGrafo === 'Dirigido') {
+            if (columna === arista_origen[i] && fila === arista_llegada[i])
+                return 1;
+        } else {
+            if (columna === arista_origen[i] && fila === arista_llegada[i] || columna === arista_llegada[i] && fila === arista_origen[i])
+                return 1;
+        }
+    }
+}
+
 /* MAtriz de adyacencia */
 
 function mAdyacencia() {
@@ -164,7 +178,7 @@ function mAdyacencia() {
     var col = [];
     for (let i = 1; i <= vertices.length; i++) {
         for (let j = 1; i <= vertices.length; j++) {
-            if (buscar(vertices[i], vertices[j] !== 1)) {
+            if (encontrar(vertices[i], vertices[j] !== 1)) {
                 col.push(0);
             } else {
                 col.push(1);
@@ -187,6 +201,17 @@ function verMatriz(MatrizA) {
         }
     }
 
+}
+
+function imprimirMatriz() {
+    document.getElementById("matriz").innerHTML = '';
+    document.getElementById("matriz").innerHTML += "<p> Matriz Adyacencia <hr>";
+    for (i = 0; i < filas; i++) {
+        for (j = 0; j < filas; j++) {
+            document.getElementById("matriz").innerHTML += matriz[i][j] + " ";
+        }
+        document.getElementById("matriz").innerHTML += "<br>";
+    }
 }
 
 
@@ -240,7 +265,3 @@ function matrizConexa(MatrizA) {
 }
 
 /* Matriz de caminos */
-
-function MatrizCaminos(MatrizA) {
-
-}

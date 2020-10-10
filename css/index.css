@@ -3,6 +3,7 @@
     --white: #ffffff;
     --primary: rgba(46, 57, 157, 0.9);
     --warning: rgba(46, 57, 157, 0.3); 
+    --danger: #CDA434;
 }
 
 html {
@@ -67,6 +68,9 @@ h2, h3 , .navbar-brand{
     background-color: var(--primary) !important;
 }
 
+.border-danger{
+    border-color: var(--danger) !important;
+}
 
 .nav-link{
     color: #CDA434 !important;

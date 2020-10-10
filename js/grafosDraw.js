@@ -1,27 +1,19 @@
-// Aca ira el codigo para trabajar con los grafos
-// Var de nosotros
 var nodes = null;
 var edges = null;
 var network = null;
 
-/*Funciones del programa y variables de la matriz*/
-
-var aristas = [];
 var vertices = [];
-var arista_origen = [];
-var arista_llegada = [];
-
-
-
+var aristas_origen = [];
+var aristas_llegada = [];
 var peso = [];
 var pesoAux = [];
-var matrizAdyacencia = [];
-var mCaminos = []
+var mAdyacencia = [];
+var mCaminos = [];
 var a_desde = [];
 var a_hacia = [];
 var contador = 1;
 
-// Funcion de Dibujo 
+// randomly create some nodes and edges
 var data = getScaleFreeNetwork(25);
 var seed = 2;
 var defaultLocal = navigator.language;
@@ -45,7 +37,7 @@ function draw() {
         locale: document.getElementById('locale').value,
         manipulation: {
             addNode: function(data, callback) {
-                // Esto se despliega luego de apretar el boton añadir nodo
+                // filling in the popup DOM elements
                 document.getElementById('node-operation').innerHTML = "Agregar Vértice";
                 editNode(data, clearNodePopUp, callback);
             },
@@ -56,14 +48,17 @@ function draw() {
             },
             addEdge: function(data, callback) {
                 if (data.from == data.to) {
-                    var r = confirm(`Si conectas un vertice a si mismo crearas un bucle , ¿estas seguro?`);
+                    var r = confirm(`
+            ¿ Deseas conectar el vértice a sí mismo ? 
+            pd: Crearás un bucle !
+          `);
                     if (r != true) {
                         callback(null);
                         return;
                     }
                 }
-                var eleccionGrafo = document.querySelector("#eleccionGrafo").value;
-                if (eleccionGrafo === 'Dirigido') {
+                var tipoGrafo = document.querySelector("#tipoGrafo").value;
+                if (tipoGrafo === 'Dirigido') {
                     var options = {
                         edges: {
                             arrows: 'to',
@@ -141,8 +136,8 @@ function saveEdgeData(data, callback) {
         data.from = data.from.id;
 
     data.label = document.getElementById('edge-label').value;
-    arista_origen.push(data.from);
-    arista_llegada.push(data.to);
+    aristas_origen.push(data.from);
+    aristas_llegada.push(data.to);
     peso.push(data.label);
 
     clearEdgePopUp();
@@ -155,74 +150,47 @@ function init() {
 }
 
 
-/* Saber si es dirigido o no*/
 
-
-function encontrar(columna, fila) {
-    var eleccionGrafo = document.querySelector("#eleccionGrafo").value;
-    for (let i = 1; i <= (arista_origen.length); i++) {
-        if (eleccionGrafo === 'Dirigido') {
-            if (columna === arista_origen[i] && fila === arista_llegada[i])
+//a. matriz de caminos y grafo conexa o no
+function buscar(columna, fila) {
+    var tipoGrafo = document.querySelector("#tipoGrafo").value;
+    for (let i = 0; i < (aristas_origen.length); i++) {
+        if (tipoGrafo === 'Dirigido') {
+            if (columna === aristas_origen[i] && fila === aristas_llegada[i])
                 return 1;
         } else {
-            if (columna === arista_origen[i] && fila === arista_llegada[i] || columna === arista_llegada[i] && fila === arista_origen[i])
+            if (columna === aristas_origen[i] && fila === aristas_llegada[i] || columna === aristas_llegada[i] && fila === aristas_origen[i])
                 return 1;
         }
     }
 }
 
-/* MAtriz de adyacencia */
 
-function mAdyacencia() {
-    var matrizAdyacencia = [];
-    var col = [];
-    for (let i = 1; i <= vertices.length; i++) {
-        for (let j = 1; i <= vertices.length; j++) {
-            if (encontrar(vertices[i], vertices[j] !== 1)) {
+
+
+function MatrizAdyacencia() {
+    var mAdyacencia = []
+    var col = []; // columnas
+    for (let i = 0; i < vertices.length; i++) {
+        for (let j = 0; j < vertices.length; j++) {
+            if (buscar(vertices[i], vertices[j]) !== 1) {
                 col.push(0);
             } else {
                 col.push(1);
             }
         }
-        matrizAdyacencia[i] = col;
+        mAdyacencia[i] = col;
         col = [];
     }
-    return matrizAdyacencia;
+    return mAdyacencia;
 }
-
-
-/* Funcion para mostrar matriz */
-
-function verMatriz(MatrizA) {
-
-    for (let i = 0; i < vertices.length; i++) {
-        for (let j = 0; j < vertices.length; j++) {
-            console.log(MatrizA[i][j]);
-        }
-    }
-
-}
-
-function imprimirMatriz() {
-    document.getElementById("matriz").innerHTML = '';
-    document.getElementById("matriz").innerHTML += "<p> Matriz Adyacencia <hr>";
-    for (i = 0; i < filas; i++) {
-        for (j = 0; j < filas; j++) {
-            document.getElementById("matriz").innerHTML += matriz[i][j] + " ";
-        }
-        document.getElementById("matriz").innerHTML += "<br>";
-    }
-}
-
-
-/* Multiplicacion de matrices para poder saber los caminos */
 
 function Multiplicacion_de_Matriz(MatrizA, MatrizB, MatrizC) {
-    let resultado = 0,
+    var resultado = 0,
         MatrizAux = [];
-    for (let i = 0; i <= vertices.lenght; i++) {
-        for (let j = 0; j <= vertices.lenght; j++) {
-            for (let k = 0; k <= vertices.lenght; k++) {
+    for (let i = 0; i < vertices.length; i++) {
+        for (let j = 0; j < vertices.length; j++) {
+            for (let k = 0; k < vertices.length; k++) {
                 resultado += MatrizA[i][k] * MatrizB[j][k];
             }
             MatrizAux.push(resultado);
@@ -230,18 +198,20 @@ function Multiplicacion_de_Matriz(MatrizA, MatrizB, MatrizC) {
         }
         MatrizC[i] = MatrizAux;
         MatrizAux = [];
+
     }
 }
 
 
 function Suma_De_Matrices(MatrizA, MatrizB, MatrizC) {
     var MatrizAux = [];
-    for (let i = 0; i < vertices.lenght; i++) {
-        for (let j = 0; j < vertices.lenght; j++) {
+    for (let i = 0; i < vertices.length; i++) {
+        for (let j = 0; j < vertices.length; j++) {
             MatrizAux.push(MatrizA[i][j] + MatrizB[i][j]);
         }
         MatrizC[i] = MatrizAux;
         MatrizAux = [];
+
     }
 }
 
@@ -250,8 +220,8 @@ function Suma_De_Matrices(MatrizA, MatrizB, MatrizC) {
 
 function matrizConexa(MatrizA) {
     let contador = 0;
-    for (let i = 0; i < vertices.lenght; i++) {
-        for (let j = 0; j < vertices.lenght; j++) {
+    for (let i = 0; i < vertices.length; i++) {
+        for (let j = 0; j < vertices.length; j++) {
             if (MatrizA[i][j] != 0) {
                 contador++;
             } else {
@@ -264,4 +234,107 @@ function matrizConexa(MatrizA) {
         return true;
 }
 
-/* Matriz de caminos */
+
+function MatrizCaminos(mAdyacencia) {
+    var multiplicada = [],
+        mCaminos = [],
+        aux = [],
+        sumada = [] = mAdyacencia,
+        aux = mAdyacencia;
+    for (let i = 0; i < ((vertices.length) - 1); i++) {
+        Multiplicacion_de_Matriz(mAdyacencia, aux, multiplicada);
+    }
+    Suma_De_Matrices(multiplicada, sumada, mCaminos);
+    aux = multiplicada;
+
+    return mCaminos;
+}
+
+
+function dibujarMAtriz(matriz) {
+    //creo los elementos y llamo a la tabla del html
+    var tablaS = document.createElement('table'); //TablaS es la matriz superior donde se guarda todo
+    var fila = document.createElement('tr');
+    var primero = document.createElement('td');
+    primero.textContent = "M";
+    primero.style.backgroundColor = "#CDA434";
+    primero.style.textAlign = "center";
+    primero.style.width = "40px";
+    primero.style.height = "40px";
+    primero.style.borderColor = "#1F1F1F";
+    fila.appendChild(primero);
+    //for para agregar los valores de la primera fila
+    for (let i = 0; i < vertices.length; i++) {
+        var p_fila = document.createElement('td');
+        p_fila.style.width = "40px";
+        p_fila.style.height = "40px";
+        p_fila.style.textAlign = "center";
+        p_fila.style.backgroundColor = "#CDA434";
+        p_fila.style.borderColor = "#1F1F1F";
+        p_fila.textContent = vertices[i];
+        fila.appendChild(p_fila);
+    }
+    tablaS.appendChild(fila);
+
+    for (let k = 0; k < matriz.length; k++) {
+        //se agrega el nombre de los vertices (en la primera columna)
+        var o_filas = document.createElement('tr');
+        var nombre = document.createElement('td');
+        nombre.style.width = "40px";
+        nombre.style.height = "40px";
+        nombre.style.backgroundColor = "#CDA434";
+        nombre.style.borderColor = "#1F1F1F";
+        nombre.style.textAlign = "center";
+        nombre.textContent = vertices[k];
+        o_filas.appendChild(nombre);
+
+        for (let j = 0; j < matriz.length; j++) {
+            //se agregan los datos contenidos en la matriz
+            var datos = document.createElement('td');
+            datos.style.width = "40px";
+            datos.style.height = "40px";
+            datos.style.textAlign = "center";
+            datos.style.borderColor = "#1F1F1F";
+            datos.textContent = matriz[k][j];
+            o_filas.appendChild(datos);
+        }
+        tablaS.appendChild(o_filas);
+    }
+    return tablaS;
+}
+
+
+/*Funciones de Imprimir de matrices*/
+
+
+function imprimirAD() {
+    const matrizAdy = document.querySelector("#matrizAdy");
+    var matriz = MatrizAdyacencia();
+    matrizAdy.appendChild(dibujarMAtriz(matriz));
+
+}
+
+
+function imprimirCamino() {
+
+    var mAdyacencia = MatrizAdyacencia();
+    const matrizCamino = document.querySelector("#matrizCam");
+    matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+    matrizCamino.appendChild(dibujarMAtriz(matriz_c));
+}
+
+
+function imprimirConexo() {
+    var mAdyacencia = MatrizAdyacencia();
+    const matrizCamino = document.querySelector("#matrizCam");
+    matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+    /* es conexo */
+    const saberCon = document.querySelector("#saberConexo");
+    var conexo = matrizConexa(matriz_c);
+    if (conexo) {
+        saberCon.textContent = "La matriz ingresada es Conexa :D !";
+    } else {
+        saberCon.textContent = "Su matriz no es Conexa :V";
+    }
+
+}

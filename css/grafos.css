@@ -8,6 +8,7 @@
     border-bottom: 2px solid black;
     margin-left: 20% !important;
     margin-right: 20% !important;
+    margin: 0;
 }
 
 
@@ -39,6 +40,7 @@
     border-width: 3px;
     border-color: #CDA434;
     padding: 10px;
+    color: black;
     text-align: center;
 }
 
@@ -55,4 +57,37 @@
     border-color: #CDA434;
     padding: 10px;
     text-align: center !important;
+}
+
+.marginbtn {
+    margin-left: 75px;
+}
+
+
+/* Bordes para los bloques de mostrar */
+
+:root {
+    --dark: black;
+    --danger: #CDA434;
+}
+
+.border-danger {
+    border-color: var(--dark) !important;
+    border-radius: 20px;
+    min-height: 200px !important;
+    max-width: 350px;
+}
+
+.border-danger:hover {
+    border-color: var(--danger) !important;
+    border-radius: 20px;
+    min-height: 200px !important;
+    max-width: 350px;
+}
+
+#grafos .dividerGr {
+    border-bottom: 2px solid black;
+    margin-left: 7% !important;
+    margin-right: 7% !important;
+    margin: 0;
 }

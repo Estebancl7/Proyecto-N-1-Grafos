@@ -33,23 +33,25 @@
     position: absolute;
     border-radius: 20px;
     z-index: 299;
-    width: 250px;
-    height: 170px;
+    width: 240px;
+    height: 150px;
     background-color: white;
     border-style: solid;
-    border-width: 3px;
+    /*border-width: 3px;*/
     border-color: #CDA434;
-    padding: 10px;
-    color: black;
+    padding: 2px;
     text-align: center;
+    left: 575px;
+    top: 40px;
 }
 
 #edge-popUp {
+    color: black;
     display: none;
     position: absolute;
     border-radius: 20px;
     z-index: 299;
-    width: 250px;
+    width: 240px;
     height: 150px;
     background-color: #f9f9f9;
     border-style: solid;
@@ -57,6 +59,8 @@
     border-color: #CDA434;
     padding: 10px;
     text-align: center !important;
+    left: 575px;
+    top: 40px;
 }
 
 .marginbtn {

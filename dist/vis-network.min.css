@@ -8,7 +8,7 @@
 }
 
 .vis-active {
-    box-shadow: 0 0 10px #86d5f8
+    box-shadow: 0 0 10px #86d5f8;
 }
 
 .vis [class*=span] {
@@ -457,24 +457,24 @@ div.vis-color-picker div.vis-button {
 }
 
 div.vis-color-picker div.vis-button.vis-cancel {
-    left: 5px
+    left: 5px;
 }
 
 div.vis-color-picker div.vis-button.vis-load {
-    left: 82px
+    left: 82px;
 }
 
 div.vis-color-picker div.vis-button.vis-apply {
-    left: 159px
+    left: 159px;
 }
 
 div.vis-color-picker div.vis-button.vis-save {
-    left: 236px
+    left: 236px;
 }
 
 div.vis-color-picker input.vis-range {
     width: 290px;
-    height: 20px
+    height: 20px;
 }
 
 
@@ -505,11 +505,13 @@ background:linear-gradient(to bottom,#fff 0,#fcfcfc 48%,#fafafa 50%,#fcfcfc 100%
     height: 28px
 }
 
+/* Barra modificar */
+ 
 div.vis-network div.vis-edit-mode {
     position: absolute;
     left: 0;
     top: 5px;
-    height: 30px
+    height: 30px;
 }
 
 

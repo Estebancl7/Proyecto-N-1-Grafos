@@ -31,9 +31,7 @@
 </head>
 
 <body>
-    <!--PONER EL BACK EN EL CSS-->
 
-    <!-- HEADER -->
     <!-- Header-->
 
     <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top p-3">
@@ -191,48 +189,66 @@
 
                             </div>
                         </div><!--Aca termina el primer raw-->
+
+
+
+                        <h1 class="text-center mt-5">Item c. Hamiltoniano y/o Euleriano</h1>
+                        <h1 class="dividerg mb-3"></h1>
                         <div class="row pb-5">
-                            <div class="col-4 border border-danger mt-4">
-                                <div class="col-12 my-2">
-                                    <h3 class="text-center">Matriz de Adyacencia</h3>
+                            
+                            <div class="col-12 border border-danger mt-4 my-12">
+                                <div class="col-12 my-2"></div>
+                                    <h3 class="text-center">¿Es euleriano?</h3>
                                     <h1 class="dividerGr"></h1>
-                                    <a onclick="imprimirAD()" class="btn btn-outline-light mt-4 marginbtn">Mostrar Matriz</a>
+                                    <a onclick="imprimirEuleriano()" class="btn btn-outline-light mt-4 marginbtn">Ver Resultados</a>
                                     <div class="row justify-content-center">
-                                        <div id="matrizAdy" class="pt-4 pb-2"></div>
+                                        <div id="esEule" class="pt-4 pb-2"></div>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col-4 border border-danger mt-4 mx-4">
-                                <div class="col-12 my-2">
-                                    <h3 class="text-center">Matriz de Caminos</h3>
-                                    <h1 class="dividerGr"></h1>
-                                    <a onclick="imprimirAD()" class="btn btn-outline-light mt-4 marginbtn">Haz clic para ver!</a>
-                                    <div class="row justify-content-center">
-                                        <div id="matrizAdy" class="pt-4 pb-2"></div>
-                                    </div>
 
+                                                        
+                            <div class="col-12 border border-danger mt-4 my-2">
+                                <div class="col-12 my-2"></div>
+                                    <h3 class="text-center">¿Es hamiltoniano?</h3>
+                                    <h1 class="dividerGr"></h1>
+                                    <a onclick="imprimirHamil()" class="btn btn-outline-light mt-4 marginbtn">Ver si es Hamiltoniano</a>
+                                    <div class="row justify-content-center">
+                                        <div id="esHamilto" class="pt-4 pb-2"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-4 border border-danger mt-4">
-                                <div class="col-12 my-2">
-                                    <h3 class="text-center">Matriz de Adyacencia</h3>
-                                    <h1 class="dividerGr"></h1>
-                                    <a onclick="imprimirAD()" class="btn btn-outline-light mt-4 marginbtn">Matriz de caminos</a>
-                                    <div class="row justify-content-center">
-                                        <div id="matrizAdy" class="pt-4 pb-2"></div>
-                                    </div>
 
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-12 border border-darks mt-4 my-2">
+                            <h3 class="text-center">¿Es euleriano?</h3>
+                            <h1 class="dividerGr"></h1>
+                            <a onclick="imprimirEuleriano()" class="btn btn-outline-light mt-4 marginbtn">Ver Resultados</a>
+                            <div class="row justify-content-center">
+                                <div id="esEule" class="pt-4 pb-2"></div>
+                            </div>
+                        </div>
 
+                        <div class="col-12 border border-darks mt-4 my-2">
+                                <h3 class="text-center">¿Es hamiltoniano?</h3>
+                            <h1 class="dividerGr"></h1>
+                            <a onclick="imprimirHamil()" class="btn btn-outline-light mt-4 marginbtn">Ver si es Hamiltoniano</a>
+                            <div class="row justify-content-center">
+                                <div id="esHamilto" class="pt-4 pb-2"></div>
+                            </div>                            
+                        </div>
+                    </div>
                 </div>
 
-
+                
             </div>
+
+
         </div>
 
         </div>
@@ -281,4 +297,4 @@
 
 </body>
 
-</html>
+</html> 

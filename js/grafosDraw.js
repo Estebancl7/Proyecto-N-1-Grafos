@@ -49,8 +49,7 @@ function draw() {
             addEdge: function(data, callback) {
                 if (data.from == data.to) {
                     var r = confirm(`
-            ¿ Deseas conectar el vértice a sí mismo ? 
-            pd: Crearás un bucle !
+            Si conectas el vertice a si mismo crearas un buble, ¿estas seguro? 
           `);
                     if (r != true) {
                         callback(null);
@@ -166,7 +165,7 @@ function buscar(columna, fila) {
 }
 
 
-
+/* Matriz de adyacencia */
 
 function MatrizAdyacencia() {
     var mAdyacencia = []
@@ -185,6 +184,22 @@ function MatrizAdyacencia() {
     return mAdyacencia;
 }
 
+
+/* Suma de matrices para usar en funcion de matriz de caminos */
+function Suma_De_Matrices(MatrizA, MatrizB, MatrizC) {
+    var MatrizAux = [];
+    for (let i = 0; i < vertices.length; i++) {
+        for (let j = 0; j < vertices.length; j++) {
+            MatrizAux.push(MatrizA[i][j] + MatrizB[i][j]);
+        }
+        MatrizC[i] = MatrizAux;
+        MatrizAux = [];
+
+    }
+}
+
+/* Multiplicacion de matrices para usar en matriz de caminos */
+
 function Multiplicacion_de_Matriz(MatrizA, MatrizB, MatrizC) {
     var resultado = 0,
         MatrizAux = [];
@@ -201,20 +216,6 @@ function Multiplicacion_de_Matriz(MatrizA, MatrizB, MatrizC) {
 
     }
 }
-
-
-function Suma_De_Matrices(MatrizA, MatrizB, MatrizC) {
-    var MatrizAux = [];
-    for (let i = 0; i < vertices.length; i++) {
-        for (let j = 0; j < vertices.length; j++) {
-            MatrizAux.push(MatrizA[i][j] + MatrizB[i][j]);
-        }
-        MatrizC[i] = MatrizAux;
-        MatrizAux = [];
-
-    }
-}
-
 
 /* Matriz conexa*/
 
@@ -251,7 +252,7 @@ function MatrizCaminos(mAdyacencia) {
 }
 
 
-function dibujarMAtriz(matriz) {
+function drawMatriz(matriz) {
     //creo los elementos y llamo a la tabla del html
     var tablaS = document.createElement('table'); //TablaS es la matriz superior donde se guarda todo
     var fila = document.createElement('tr');
@@ -306,23 +307,20 @@ function dibujarMAtriz(matriz) {
 
 /*Funciones de Imprimir de matrices*/
 
-
 function imprimirAD() {
     const matrizAdy = document.querySelector("#matrizAdy");
     var matriz = MatrizAdyacencia();
-    matrizAdy.appendChild(dibujarMAtriz(matriz));
+    matrizAdy.appendChild(drawMatriz(matriz));
 
 }
-
 
 function imprimirCamino() {
 
     var mAdyacencia = MatrizAdyacencia();
     const matrizCamino = document.querySelector("#matrizCam");
     matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
-    matrizCamino.appendChild(dibujarMAtriz(matriz_c));
+    matrizCamino.appendChild(drawMatriz(matriz_c));
 }
-
 
 function imprimirConexo() {
     var mAdyacencia = MatrizAdyacencia();
@@ -336,5 +334,243 @@ function imprimirConexo() {
     } else {
         saberCon.textContent = "Su matriz no es Conexa :V";
     }
+}
 
+function ObtenerPeso(columnas, filas) {
+    for (let i = 0; i < aristas_origen.length; i++) {
+        if (columnas === aristas_origen[i] && filas === aristas_llegada[i]) {
+            return peso[i];
+        }
+    }
+}
+
+function Matriz_Pesos() {
+    var Matriz_de_Peso = [];
+    var Matriz_aux = [];
+    for (i = 0; i < vertices.length; i++) {
+        for (j = 0; j < vertices.length; j++) {
+            if (buscar(vertices[i], vertices[j]) === 1) {
+                Matriz_aux.push(ObtenerPeso(vertices[i], vertices[j]));
+
+            } else {
+                Matriz_aux.push(Infinity);
+            }
+        }
+        Matriz_de_Peso[i] = Matriz_aux;
+        Matriz_aux = [];
+    }
+    return Matriz_de_Peso;
+
+
+}
+
+
+function CaminoMasCorto(Matriz_de_Peso) {
+    let vertices = Matriz_de_Peso.length;
+    var MatrizAuxi = Matriz_de_Peso;
+    var caminos = [];
+    var caminosauxiliares = [];
+    let caminoRecorrido = "",
+        cadena = "",
+        caminitos = "";
+    let temporal1, temporal2, temporal3, temporal4, minimo;
+    for (let k = 0; k < vertices; k++) {
+        for (let i = 0; i < vertices; i++) {
+            for (let j = 0; j < vertices.length; j++) {
+                temporal1 = Matriz_de_Peso[i][j];
+                temporal2 = Matriz_de_Peso[i][k];
+                temporal3 = Matriz_de_Peso[k][j];
+                temporal4 = temporal2 + temporal3;
+
+                minimo = Math.min(temporal1, temporal4);
+                if (temporal1 != temporal4) {
+                    if (minimo = temporal4) {
+                        caminoRecorrido = "";
+                        caminosauxiliares[i][j] = k + "";
+                        caminos[i][j] = caminosR(i, k, caminosauxiliares, caminoRecorrido) + (k + 1);
+
+                    }
+                }
+                MatrizAuxi[i][j] = minimo;
+            }
+        }
+    }
+    for (let i = 0; i < vertices; i++) {
+        for (let j = 0; j < vertices; j++) {
+            cadena = cadena + "[" + MatrizAuxi[i][j] + "]";
+        }
+        cadena = cadena + "\n";
+    }
+    for (let i = 0; i < vertices; i++) {
+        for (let j = 0; j < vertices; j++) {
+            if (MatrizAuxi[i][j] != 1000000000000) {
+                if (i != j) {
+                    if (caminos[i][j].equals("")) {
+                        caminitos += "De (" + (i + 1) + "--->" + (j + 1) + ")Irse Por...(" + (i + 1) + "," + (j + 1) + ")\n";
+                    } else {
+                        caminitos += "De (" + (i + 1) + "--->" + (j + 1) + ")Irse Por...(" + (i + 1) + "," + caminos[i][j] + ", " + (j + 1) + ")\n";
+                    }
+                }
+            }
+        }
+    }
+    return "La Matriz de caminos mas cortos entre los diferentes vertices es:\n" + cadena + "\nLos diferentes caminos mas cortos entre vertices son:\n" + caminitos;
+
+    function caminosR(i, k, MatrizJ, caminosauxiliares, caminoRecorrido) {
+        if (caminosauxiliares[i][k].equals("")) {
+            return "";
+        } else {
+            caminoRecorrido += caminosR(i, Integer.parseInt(caminosauxiliares[i][k]), caminosauxiliares, caminoRecorrido) + (Integer.parseInt(caminosauxiliares[i][k]) + 1) + ",";
+            return caminoRecorrido;
+        }
+    }
+}
+
+
+
+
+
+/* 
+function CaminoCorto(Matriz_A, nodo1, nodo2) {
+    var aux_camino = Infinity;
+    var contador = 0;
+    for (i = 0; i < vertices.length; i++) {
+        for (j = 0; j < vertices.length; j++) {
+            if (nodo1 === i) {
+                if(nodo2 === j){
+                    if(Matriz_A[i][j] < aux_camino){
+                        aux_camino = Matriz_A[i][j];
+                    }
+                }
+                else{
+                    if(Matriz_A[i][j] != Infinity){
+                        
+                        if(Matriz_A[j][nodo2] != Infinity){
+                            for(let k = 0; k < vertices.length; k++) {
+                                if(Matriz_A[j][k] != Infinity){
+                                
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*/
+
+/* Item C, indicar si es hamiltoniano y/o euleriano */
+
+/* Grafo euleriano , si es euleriano es conexo por tanto debe tener un circuito cerrado G tiene una componente conexa y
+ el resto son vértices aislados*/
+
+function gradoPar(matrizA) {
+    var aux = 0;
+    for (let i = 0; i < matrizA.length; i++) {
+        if ((matrizA[i] % 2) === 0)
+            aux++;
+    }
+    if (aux === matrizA.length) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function grado(matrizA) {
+    var gradoVertice = [],
+        grado = 0;
+    for (let i = 0; i < matrizA.length; i++) {
+        for (let j = 0; j < matrizA.length; j++) {
+            grado += matrizA[i][j];
+        }
+        gradoVertice.push(grado);
+        grado = 0;
+    }
+    if (gradoPar(gradoVertice) === true) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function esEuleriano() {
+    const matrizCamino = document.querySelector("#matrizCam");
+    var mAdyacencia = MatrizAdyacencia();
+    var matrizCam = MatrizCaminos(mAdyacencia, mCaminos);
+    if (grado(matrizCam) === true && matrizConexa(mAdyacencia) === false) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function imprimirEuleriano() {
+    var mAdyacencia = MatrizAdyacencia();
+    const matrizCamino = document.querySelector("#matrizCam");
+    matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+    const esEule = document.querySelector("#esEule");
+    var eule = esEuleriano();
+    if (eule) {
+        esEule.textContent = "Su grafo es Euleriano :D !";
+    } else {
+        esEule.textContent = "Su grafo no es Euleriano :v !";
+    }
+
+}
+
+/* Funcion para saber si es hamiltoniano */
+
+function gradoHamil(mAdyacencia) {
+    var gradoVertice = [],
+        grado = 0;
+    for (let i = 0; i < mAdyacencia.length; i++) {
+        for (let j = 0; j < mAdyacencia.length; j++) {
+            grado += mAdyacencia[i][j];
+        }
+        gradoVertice.push(grado);
+        grado = 0;
+    }
+    return gradoVertice;
+}
+
+
+function esHamil(mAdyacencia) {
+    var aux = gradoHamil(mAdyacencia);
+    var cont = 0;
+    for (let i = 0; i < aux.length; i++) {
+        if (aux[i] > 2) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
+
+function esHamiltoniano() {
+    var mAdyacencia = MatrizAdyacencia();
+    if (esHamil(mAdyacencia) === true) {
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
+
+function imprimirHamil() {
+    var mAdyacencia = MatrizAdyacencia();
+    const matrizCamino = document.querySelector("#matrizCam");
+    matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+    const esHamilto = document.querySelector("#esHamilto");
+    var hamil = esHamiltoniano();
+    if (hamil) {
+        esHamilto.textContent = "El grafo es Hamiltoniano :D";
+    } else {
+        esHamilto.textContent = "El grafo no es Hamiltoniano :V";
+    }
 }

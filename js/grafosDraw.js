@@ -13,7 +13,7 @@ var a_desde = [];
 var a_hacia = [];
 var contador = 1;
 
-// randomly create some nodes and edges
+
 var data = getScaleFreeNetwork(25);
 var seed = 2;
 var defaultLocal = navigator.language;
@@ -30,19 +30,16 @@ function draw() {
     destroy();
     nodes = [];
     edges = [];
-    // create a network
     var container = document.getElementById('resultado');
     var options = {
-        layout: { randomSeed: seed }, // just to make sure the layout is the same when the locale is changed
+        layout: { randomSeed: seed },
         locale: document.getElementById('locale').value,
         manipulation: {
             addNode: function(data, callback) {
-                // filling in the popup DOM elements
                 document.getElementById('node-operation').innerHTML = "Agregar Vértice";
                 editNode(data, clearNodePopUp, callback);
             },
             editNode: function(data, callback) {
-                // filling in the popup DOM elements
                 document.getElementById('node-operation').innerHTML = "Editar Vértice";
                 editNode(data, cancelNodeEdit, callback);
             },
@@ -88,7 +85,6 @@ function editNode(data, cancelAction, callback) {
     document.getElementById('node-popUp').style.display = 'block';
 }
 
-// Callback passed as parameter is ignored
 function clearNodePopUp() {
     document.getElementById('node-saveButton').onclick = null;
     document.getElementById('node-cancelButton').onclick = null;
@@ -109,8 +105,6 @@ function saveNodeData(data, callback) {
 }
 
 function editEdgeWithoutDrag(data, callback) {
-    // filling in the popup DOM elements
-    // document.getElementById('edge-label').value = data.label;
     document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
     document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this, callback);
     document.getElementById('edge-popUp').style.display = 'block';
@@ -149,8 +143,6 @@ function init() {
 }
 
 
-
-//a. matriz de caminos y grafo conexa o no
 function buscar(columna, fila) {
     var tipoGrafo = document.querySelector("#tipoGrafo").value;
     for (let i = 0; i < (aristas_origen.length); i++) {
@@ -165,11 +157,10 @@ function buscar(columna, fila) {
 }
 
 
-/* Matriz de adyacencia */
 
 function MatrizAdyacencia() {
     var mAdyacencia = []
-    var col = []; // columnas
+    var col = []; 
     for (let i = 0; i < vertices.length; i++) {
         for (let j = 0; j < vertices.length; j++) {
             if (buscar(vertices[i], vertices[j]) !== 1) {
@@ -184,8 +175,6 @@ function MatrizAdyacencia() {
     return mAdyacencia;
 }
 
-
-/* Suma de matrices para usar en funcion de matriz de caminos */
 function Suma_De_Matrices(MatrizA, MatrizB, MatrizC) {
     var MatrizAux = [];
     for (let i = 0; i < vertices.length; i++) {
@@ -198,7 +187,6 @@ function Suma_De_Matrices(MatrizA, MatrizB, MatrizC) {
     }
 }
 
-/* Multiplicacion de matrices para usar en matriz de caminos */
 
 function Multiplicacion_de_Matriz(MatrizA, MatrizB, MatrizC) {
     var resultado = 0,
@@ -217,7 +205,6 @@ function Multiplicacion_de_Matriz(MatrizA, MatrizB, MatrizC) {
     }
 }
 
-/* Matriz conexa*/
 
 function matrizConexa(MatrizA) {
     let contador = 0;
@@ -253,8 +240,7 @@ function MatrizCaminos(mAdyacencia) {
 
 
 function drawMatriz(matriz) {
-    //creo los elementos y llamo a la tabla del html
-    var tablaS = document.createElement('table'); //TablaS es la matriz superior donde se guarda todo
+    var tablaS = document.createElement('table'); 
     var fila = document.createElement('tr');
     var primero = document.createElement('td');
     primero.textContent = "M";
@@ -264,7 +250,6 @@ function drawMatriz(matriz) {
     primero.style.height = "40px";
     primero.style.borderColor = "#1F1F1F";
     fila.appendChild(primero);
-    //for para agregar los valores de la primera fila
     for (let i = 0; i < vertices.length; i++) {
         var p_fila = document.createElement('td');
         p_fila.style.width = "40px";
@@ -278,7 +263,6 @@ function drawMatriz(matriz) {
     tablaS.appendChild(fila);
 
     for (let k = 0; k < matriz.length; k++) {
-        //se agrega el nombre de los vertices (en la primera columna)
         var o_filas = document.createElement('tr');
         var nombre = document.createElement('td');
         nombre.style.width = "40px";
@@ -290,7 +274,6 @@ function drawMatriz(matriz) {
         o_filas.appendChild(nombre);
 
         for (let j = 0; j < matriz.length; j++) {
-            //se agregan los datos contenidos en la matriz
             var datos = document.createElement('td');
             datos.style.width = "40px";
             datos.style.height = "40px";
@@ -304,8 +287,6 @@ function drawMatriz(matriz) {
     return tablaS;
 }
 
-
-/*Funciones de Imprimir de matrices*/
 
 function imprimirAD() {
     const matrizAdy = document.querySelector("#matrizAdy");
@@ -326,7 +307,6 @@ function imprimirConexo() {
     var mAdyacencia = MatrizAdyacencia();
     const matrizCamino = document.querySelector("#matrizCam");
     matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
-    /* es conexo */
     const saberCon = document.querySelector("#saberConexo");
     var conexo = matrizConexa(matriz_c);
     if (conexo) {
@@ -364,7 +344,7 @@ function Matriz_Pesos() {
 
 }
 
-
+/*
 function CaminoMasCorto(Matriz_de_Peso) {
     let vertices = Matriz_de_Peso.length;
     var MatrizAuxi = Matriz_de_Peso;
@@ -427,7 +407,7 @@ function CaminoMasCorto(Matriz_de_Peso) {
 }
 
 
-
+*/
 
 
 /* 
@@ -539,7 +519,6 @@ function gradoHamil(mAdyacencia) {
 
 function esHamil(mAdyacencia) {
     var aux = gradoHamil(mAdyacencia);
-    var cont = 0;
     for (let i = 0; i < aux.length; i++) {
         if (aux[i] > 2) {
             return false;
@@ -547,7 +526,6 @@ function esHamil(mAdyacencia) {
     }
     return true;
 }
-
 
 
 
@@ -560,7 +538,6 @@ function esHamiltoniano() {
     }
 
 }
-
 
 function imprimirHamil() {
     var mAdyacencia = MatrizAdyacencia();

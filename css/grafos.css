@@ -59,6 +59,13 @@
 .marginbtn {
     margin-left: 75px;
 }
+.marginbtn1 {
+    margin-left: 140px;
+}
+.marginbtn2 {
+    margin-left: 25%;
+    margin-right: 25%;
+}
 
 
 /* Bordes para los bloques de mostrar */
@@ -89,11 +96,27 @@
     margin: 0;
 }
 
+
+
+
 .border-darks {
     border-color: var(--dark) !important;
     border-radius: 20px;
-    min-height: 200px !important;
-    max-width: 850px;
-    margin-left: 10% !important;
-    margin-left: 10% !important;
+    min-height: 250px !important;
+    max-width: 450px;
+    /*margin-left: 30% !important;
+    margin-right: 30% !important;*/
+}
+.border-darks {
+    border-color: var(--dark) !important;
+    border-radius: 20px;
+    min-height: 250px !important;
+    max-width: 450px;
+    margin-right: 1% !important;
+}
+.border-darks:hover {
+    border-color: var(--danger) !important;
+    border-radius: 20px;
+    min-height: 250px !important;
+    max-width: 450px;
 }

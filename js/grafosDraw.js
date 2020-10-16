@@ -45,9 +45,8 @@ function draw() {
             },
             addEdge: function(data, callback) {
                 if (data.from == data.to) {
-                    var r = confirm(`
-            Si conectas el vertice a si mismo crearas un buble, ¿estas seguro? 
-          `);
+                    var r = confirm("Si conectas el vertice a si mismo crearas un bucle, ¿estas seguro? ");
+                    r.className = ("alert alert-warning text-center");
                     if (r != true) {
                         callback(null);
                         return;
@@ -160,7 +159,7 @@ function buscar(columna, fila) {
 
 function MatrizAdyacencia() {
     var mAdyacencia = []
-    var col = []; 
+    var col = [];
     for (let i = 0; i < vertices.length; i++) {
         for (let j = 0; j < vertices.length; j++) {
             if (buscar(vertices[i], vertices[j]) !== 1) {
@@ -240,7 +239,7 @@ function MatrizCaminos(mAdyacencia) {
 
 
 function drawMatriz(matriz) {
-    var tablaS = document.createElement('table'); 
+    var tablaS = document.createElement('table');
     var fila = document.createElement('tr');
     var primero = document.createElement('td');
     primero.textContent = "M";
@@ -311,8 +310,10 @@ function imprimirConexo() {
     var conexo = matrizConexa(matriz_c);
     if (conexo) {
         saberCon.textContent = "La matriz ingresada es Conexa :D !";
+        saberCon.className = "alert alert-warning text-center";
     } else {
         saberCon.textContent = "Su matriz no es Conexa :V";
+        saberCon.className = "alert alert-warning text-center";
     }
 }
 
@@ -333,18 +334,16 @@ function Matriz_Pesos() {
                 Matriz_aux.push(ObtenerPeso(vertices[i], vertices[j]));
 
             } else {
-                Matriz_aux.push(Infinity);
+                Matriz_aux.push(0);
             }
         }
         Matriz_de_Peso[i] = Matriz_aux;
         Matriz_aux = [];
     }
     return Matriz_de_Peso;
-
-
 }
 
-/*
+
 function CaminoMasCorto(Matriz_de_Peso) {
     let vertices = Matriz_de_Peso.length;
     var MatrizAuxi = Matriz_de_Peso;
@@ -354,6 +353,7 @@ function CaminoMasCorto(Matriz_de_Peso) {
         cadena = "",
         caminitos = "";
     let temporal1, temporal2, temporal3, temporal4, minimo;
+    let uno = 1;
     for (let k = 0; k < vertices; k++) {
         for (let i = 0; i < vertices; i++) {
             for (let j = 0; j < vertices.length; j++) {
@@ -364,14 +364,15 @@ function CaminoMasCorto(Matriz_de_Peso) {
 
                 minimo = Math.min(temporal1, temporal4);
                 if (temporal1 != temporal4) {
-                    if (minimo = temporal4) {
+                    if (minimo == temporal4) {
                         caminoRecorrido = "";
                         caminosauxiliares[i][j] = k + "";
                         caminos[i][j] = caminosR(i, k, caminosauxiliares, caminoRecorrido) + (k + 1);
 
                     }
+                } else {
+                    MatrizAuxi[i][j] = minimo;
                 }
-                MatrizAuxi[i][j] = minimo;
             }
         }
     }
@@ -386,9 +387,9 @@ function CaminoMasCorto(Matriz_de_Peso) {
             if (MatrizAuxi[i][j] != 1000000000000) {
                 if (i != j) {
                     if (caminos[i][j].equals("")) {
-                        caminitos += "De (" + (i + 1) + "--->" + (j + 1) + ")Irse Por...(" + (i + 1) + "," + (j + 1) + ")\n";
+                        caminitos += "De (" + (i + uno) + "--->" + (j + uno) + ")Irse Por...(" + (i + uno) + "," + (j + uno) + ")\n";
                     } else {
-                        caminitos += "De (" + (i + 1) + "--->" + (j + 1) + ")Irse Por...(" + (i + 1) + "," + caminos[i][j] + ", " + (j + 1) + ")\n";
+                        caminitos += "De (" + (i + uno) + "--->" + (j + uno + ")Irse Por...(" + (i + uno) + "," + caminos[i][j] + ", " + (j + uno) + ")\n");
                     }
                 }
             }
@@ -396,49 +397,16 @@ function CaminoMasCorto(Matriz_de_Peso) {
     }
     return "La Matriz de caminos mas cortos entre los diferentes vertices es:\n" + cadena + "\nLos diferentes caminos mas cortos entre vertices son:\n" + caminitos;
 
-    function caminosR(i, k, MatrizJ, caminosauxiliares, caminoRecorrido) {
+    function caminosR(i, k, caminosauxiliares, caminoRecorrido) {
         if (caminosauxiliares[i][k].equals("")) {
             return "";
         } else {
-            caminoRecorrido += caminosR(i, Integer.parseInt(caminosauxiliares[i][k]), caminosauxiliares, caminoRecorrido) + (Integer.parseInt(caminosauxiliares[i][k]) + 1) + ",";
+            caminoRecorrido += caminosR(caminosauxiliares) + (Integer.parseInt(caminosauxiliares[i][k]) + 1) + ",";
             return caminoRecorrido;
         }
     }
 }
 
-
-*/
-
-
-/* 
-function CaminoCorto(Matriz_A, nodo1, nodo2) {
-    var aux_camino = Infinity;
-    var contador = 0;
-    for (i = 0; i < vertices.length; i++) {
-        for (j = 0; j < vertices.length; j++) {
-            if (nodo1 === i) {
-                if(nodo2 === j){
-                    if(Matriz_A[i][j] < aux_camino){
-                        aux_camino = Matriz_A[i][j];
-                    }
-                }
-                else{
-                    if(Matriz_A[i][j] != Infinity){
-                        
-                        if(Matriz_A[j][nodo2] != Infinity){
-                            for(let k = 0; k < vertices.length; k++) {
-                                if(Matriz_A[j][k] != Infinity){
-                                
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-*/
 
 /* Item C, indicar si es hamiltoniano y/o euleriano */
 
@@ -495,8 +463,10 @@ function imprimirEuleriano() {
     var eule = esEuleriano();
     if (eule) {
         esEule.textContent = "Su grafo es Euleriano :D !";
+        esEule.className = "alert alert-warning text-center";
     } else {
         esEule.textContent = "Su grafo no es Euleriano :v !";
+        esEule.className = "alert alert-warning text-center";
     }
 
 }
@@ -527,8 +497,6 @@ function esHamil(mAdyacencia) {
     return true;
 }
 
-
-
 function esHamiltoniano() {
     var mAdyacencia = MatrizAdyacencia();
     if (esHamil(mAdyacencia) === true) {
@@ -547,7 +515,92 @@ function imprimirHamil() {
     var hamil = esHamiltoniano();
     if (hamil) {
         esHamilto.textContent = "El grafo es Hamiltoniano :D";
+        esHamilto.className = "alert alert-warning text-center";
     } else {
         esHamilto.textContent = "El grafo no es Hamiltoniano :V";
+        esHamilto.className = "alert alert-warning text-center";
+    }
+}
+
+
+function imprimirMasCorto() {
+    var caminocor = CaminoMasCorto(Matriz_Pesos());
+    const output = document.querySelector("#caminoCorto");
+    output.textContent = caminocor;
+
+}
+
+function recorrerVertices(matrizA, en, sa, raiz) {
+    var ver_visitado = [],
+        col = [];
+    for (let i = 0; i < vertices.length; i++) {
+        ver_visitado[i] = false;
+    }
+    col.push(en);
+    ver_visitado[en] = true;
+    raiz[en] = -1;
+    while (col.length != 0) {
+        var aux = col.shift();
+        for (let i = 0; i < vertices.length; i++) {
+            if (ver_visitado[i] == false && matrizA[aux][i] > 0) {
+                col.push(i);
+                raiz[i] = aux;
+                ver_visitado[i] = true;
+
+            }
+
+        }
+
+    }
+    return (ver_visitado[sa] == true);
+
+}
+
+function calcularFlujo(matrizA, en, sa) {
+    var matriz_aux = matrizA;
+    var raiz = new Array(vertices.length);
+    var flujoC = 0;
+    var aux;
+
+    while (recorrerVertices(matriz_aux, en, sa, raiz)) {
+        var flujoMaximo = Number.MAX_VALUE;
+        for (let i = sa; i != en; i = raiz[i]) {
+            aux = raiz[i];
+            flujoMaximo = Math.min(flujoMaximo, matriz_aux[aux][i]);
+        }
+        for (let i = sa; i != en; i = raiz[i]) {
+            aux = raiz[i];
+            matriz_aux[aux][i] -= flujoMaximo;
+            matriz_aux[i][aux] += flujoMaximo;
+        }
+        flujoC += flujoMaximo;
+    }
+    return flujoC;
+}
+
+
+
+function ImprimirFlujoMaximo() {
+    var en, sa;
+    const entrada = document.querySelector("#entrada_flujo").value;
+    const salida = document.querySelector("#salida_flujo").value;
+    var tipo_grafo = document.querySelector("#tipoGrafo").value;
+    if (tipo_grafo === "Dirigido") {
+        en = vertices.indexOf(entrada);
+        sa = vertices.indexOf(salida);
+        if (en == -1 || sa == -1) {
+            alert("Error \n Ingrese un valor valido en el vertice ingresado");
+        } else {
+            var matrizPeso = Matriz_Pesos();
+            var flujoMaximo = calcularFlujo(matrizPeso, en, sa);
+            const output = document.querySelector("#flujoMax");
+            output.textContent = (`El flujo máximo de la ruta de vertices es de:  [${flujoMaximo}]`);
+            output.className = "alert alert-warning text-center";
+        }
+    } else {
+        const popAlert = document.querySelector("#popAlert");
+        popAlert.textContent = "El flujo maximo es solo para grafos dirigidos :v !";
+        popAlert.className = "alert alert-danger text-center";
+
     }
 }

@@ -68,6 +68,10 @@ h2, h3 , .navbar-brand{
     background-color: var(--primary) !important;
 }
 
+.bg-dark{
+    background-color: var(--dark) !important;
+}
+
 .border-danger{
     border-color: var(--danger) !important;
 }

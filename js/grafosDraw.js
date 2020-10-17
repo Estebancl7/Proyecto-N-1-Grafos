@@ -343,7 +343,7 @@ function Matriz_Pesos() {
     return Matriz_de_Peso;
 }
 
-
+/*
 function CaminoMasCorto(Matriz_de_Peso) {
     let vertices = Matriz_de_Peso.length;
     var MatrizAuxi = Matriz_de_Peso;
@@ -361,7 +361,6 @@ function CaminoMasCorto(Matriz_de_Peso) {
                 temporal2 = Matriz_de_Peso[i][k];
                 temporal3 = Matriz_de_Peso[k][j];
                 temporal4 = temporal2 + temporal3;
-
                 minimo = Math.min(temporal1, temporal4);
                 if (temporal1 != temporal4) {
                     if (minimo == temporal4) {
@@ -405,6 +404,48 @@ function CaminoMasCorto(Matriz_de_Peso) {
             return caminoRecorrido;
         }
     }
+} *
+*/
+function CaminoMasCorto(Matriz_de_Peso, s) {
+    var solutions = {};
+    solutions[s] = [];
+    solutions[s].dist = 0;
+
+    while (true) {
+        var parent = null;
+        var nearest = null;
+        var dist = Infinity;
+
+
+        for (var n in solutions) {
+            if (!solutions[n])
+                continue
+            var ndist = solutions[n].dist;
+            var adj = Matriz_de_Peso[n];
+
+            for (var a in adj) {
+
+                if (solutions[a])
+                    continue;
+
+                var d = adj[a] + ndist;
+                if (d < dist) {
+
+                    parent = solutions[n];
+                    nearest = a;
+                    dist = d;
+                }
+            }
+        }
+        if (dist === Infinity) {
+            break;
+        }
+
+        solutions[nearest] = parent.concat(nearest);
+        solutions[nearest].dist = dist;
+    }
+
+    return solutions;
 }
 
 
@@ -436,11 +477,17 @@ function grado(matrizA) {
         gradoVertice.push(grado);
         grado = 0;
     }
+
     if (gradoPar(gradoVertice) === true) {
+        const output = document.querySelector("#esEuleriano");
+        output.textContent = (`Además es Euleriano debido a que pasa por el camino:  [${aristas_llegada}]`);
+        output.className = ("alert alert-warning text-center mx-3");
         return true;
     } else {
         return false;
     }
+
+
 }
 
 
@@ -500,6 +547,9 @@ function esHamil(mAdyacencia) {
 function esHamiltoniano() {
     var mAdyacencia = MatrizAdyacencia();
     if (esHamil(mAdyacencia) === true) {
+        const output = document.querySelector("#esHamilton");
+        output.textContent = (`Además es hamiltoniano debido a que pasa por el camino:  [${aristas_llegada}]`);
+        output.className = ("alert alert-warning text-center mx-3");
         return true;
     } else {
         return false;
@@ -524,10 +574,19 @@ function imprimirHamil() {
 
 
 function imprimirMasCorto() {
-    var caminocor = CaminoMasCorto(Matriz_Pesos());
-    const output = document.querySelector("#caminoCorto");
-    output.textContent = caminocor;
+    var entrada;
+    const salida = document.querySelector("#entradacamino");
+    entrada = vertices.indexOf(salida);
+    if (entrada <= 0 || entrada >= 0) {
+        var Matriz_de_Peso = Matriz_Pesos();
+        var CaminonTulachi = CaminoMasCorto(Matriz_de_Peso, entrada);
+        const output = document.querySelector("#caminoCorto");
+        output.textContent = (`El flujo máximo de la ruta de vertices es de:  [${CaminonTulachi}]`);
+        output.className = "alert alert-warning text-center";
 
+    } else {
+        alert("Error \n Ingrese un valor valido");
+    }
 }
 
 function recorrerVertices(matrizA, en, sa, raiz) {
@@ -604,3 +663,4 @@ function ImprimirFlujoMaximo() {
 
     }
 }
+

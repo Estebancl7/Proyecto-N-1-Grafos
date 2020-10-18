@@ -295,14 +295,14 @@
  function imprimirCamino() {
      var mAdyacencia = MatrizAdyacencia();
      const matrizCamino = document.querySelector("#matrizCam");
-     var matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+     var matriz_c = MatrizCaminos(mAdyacencia);
      matrizCamino.appendChild(drawMatriz(matriz_c));
  }
 
  function imprimirConexo() {
      var mAdyacencia = MatrizAdyacencia();
      const matrizCamino = document.querySelector("#matrizCam");
-     var matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+     var matriz_c = MatrizCaminos(mAdyacencia);
      const saberCon = document.querySelector("#saberConexo");
      var conexo = matrizConexa(matriz_c);
      if (conexo) {
@@ -481,7 +481,7 @@
  function esEuleriano() {
      const matrizCamino = document.querySelector("#matrizCam");
      var mAdyacencia = MatrizAdyacencia();
-     var matrizCam = MatrizCaminos(mAdyacencia, mCaminos);
+     var matrizCam = MatrizCaminos(mAdyacencia);
      if (grado(matrizCam) === true && matrizConexa(mAdyacencia) === false) {
          return true;
      } else {
@@ -492,7 +492,7 @@
  function imprimirEuleriano() {
      var mAdyacencia = MatrizAdyacencia();
      const matrizCamino = document.querySelector("#matrizCam");
-     var matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+     var matriz_c = MatrizCaminos(mAdyacencia);
      const esEule = document.querySelector("#esEule");
      var eule = esEuleriano();
      if (eule) {
@@ -542,7 +542,7 @@
  function imprimirHamil() {
      var mAdyacencia = MatrizAdyacencia();
      const matrizCamino = document.querySelector("#matrizCam");
-     var matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+     var matriz_c = MatrizCaminos(mAdyacencia);
      const esHamilto = document.querySelector("#esHamilto");
      var hamil = esHamiltoniano();
      if (hamil) {
@@ -784,7 +784,7 @@
      const matrizAdy = document.querySelector("#matrizAdy");
      var mAdyacencia = MatrizAdyacencia();
      const matrizCamino = document.querySelector("#matrizCam");
-     var matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+     var matriz_c = MatrizCaminos(mAdyacencia);
      const saberCon = document.querySelector("#saberConexo");
      const output = document.querySelector("#algoritmoPrim");
      var conexo = matrizConexa(matriz_c);

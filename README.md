@@ -4,11 +4,11 @@
 
 # Integrantes
 
-Diego Salinas Gonzalez
-Luis Rivas Sanchez
-Esteban Tudela Ortiz
-Paulo Vera Chacón 
-Miguel Martinez Sanchez
+-.Diego Salinas Gonzalez
+-.Luis Rivas Sanchez
+-.Esteban Tudela Ortiz
+-.Paulo Vera Chacón 
+-.Miguel Martinez Sanchez
 
 
 

@@ -2,16 +2,15 @@
     --dark: #1a1a1a;
     --white: #ffffff;
     --primary: rgba(46, 57, 157, 0.9);
-    --warning: rgba(46, 57, 157, 0.3); 
+    --warning: rgba(46, 57, 157, 0.3);
     --danger: #CDA434;
 }
 
 html {
     scroll-behavior: smooth;
-  }
+}
 
-
-body{
+body {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     letter-spacing: .03rem;
@@ -22,83 +21,84 @@ body{
     margin-bottom: 0;
 }
 
-.navbar{
+.navbar {
     background-color: black !important;
 }
 
-
-br{
+br {
     font-size: 20px;
     color: var(--white) !important;
 }
 
-h1{
-    font-family: 'Oswald', sans-serif;   
+h1 {
+    font-family: 'Oswald', sans-serif;
 }
-h2, h3 , .navbar-brand{
+
+h2,
+h3,
+.navbar-brand {
     font-family: 'Oswald', sans-serif;
     font-weight: 500 !important;
     line-height: 1.5 !important;
     font-size: 30px;
 }
-#first h1{
+
+#first h1 {
     font-size: 40px;
     color: var(--white);
 }
 
-#first h1:hover{
+#first h1:hover {
     font-size: 41px;
 }
 
-#first p{
+#first p {
     color: var(--white);
 }
 
-#first .container{
-    background-color: black !important  ;
+#first .container {
+    background-color: black !important;
 }
 
-#first .divider{ 
+#first .divider {
     border-bottom: 2px solid var(--white) !important;
-
-    
 }
 
-.bg-primary{
+.bg-primary {
     background-color: var(--primary) !important;
 }
 
-.bg-dark{
+.bg-dark {
     background-color: var(--dark) !important;
 }
 
-.border-danger{
+.border-danger {
     border-color: var(--danger) !important;
 }
 
-.nav-link{
+.nav-link {
     color: #CDA434 !important;
     /*color: var(--white) !important;*/
     font-size: 1.0rem;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: #CDA434 !important;
     /*color: var(--white) !important;*/
     opacity: 55%;
-
 }
 
-/* Botones de todo, el header no lleva id por tanto calquier cambio de estos afecta a todos los demas botones*/ 
 
-.btn{
-    color:#CDA434 !important ;
+/* Botones de todo, el header no lleva id por tanto calquier cambio de estos afecta a todos los demas botones*/
+
+.btn {
+    color: #CDA434 !important;
     border: 1.5px solid #CDA434;
     border-radius: 20px;
     min-width: 30px;
 }
 
-.btn:hover{
+.btn:hover {
     color: black !important;
     border: 1.5px solid #CDA434;
     border-radius: 20px;
@@ -106,26 +106,26 @@ h2, h3 , .navbar-brand{
     background-color: #CDA434 !important;
 }
 
-
 .divider {
     border-bottom: 2px solid black;
 }
 
+
 /* Seccion inicio */
 
-#inicio .divider{
+#inicio .divider {
     border-bottom: 2px solid black;
 }
 
-#inicio .divider:hover{
+#inicio .divider:hover {
     border-bottom: 2px solid #CDA434;
-
 }
-span:hover{
+
+span:hover {
     color: #CDA434;
 }
 
-.text a{
+.text a {
     color: black;
     font-size: 20px;
     border-left: 3px solid black;
@@ -133,12 +133,12 @@ span:hover{
     border-right: 3px solid black;
     border-bottom: 3px solid black;
     padding: 12px 25px;
-    letter-spacing: 3px;   
+    letter-spacing: 3px;
     background-color: none;
     /*border-radius: 20px;*/
 }
 
-.text a:hover{
+.text a:hover {
     color: #CDA434;
     text-decoration: none;
     border: 3px solid #CDA434;
@@ -146,118 +146,119 @@ span:hover{
     transition: color 1.2s;
     transform: scale(1.05, 1.05);
     background-color: black;
-    transition: background-color 1.5s ;
+    transition: background-color 1.5s;
 }
+
 
 /* Seccion tecnologias */
 
-
-#tecnologias h1{
+#tecnologias h1 {
     color: black;
 }
-#tecnologias p{
+
+#tecnologias p {
     color: black;
     padding-bottom: 20px;
     font-size: 20px;
 }
 
-#tecnologias p:hover{
+#tecnologias p:hover {
     color: #CDA434;
 }
-#tecnologias img{
+
+#tecnologias img {
     width: 270px;
     height: 250px;
     padding: 0;
     margin: 0;
 }
 
-
 #tecnologias .divider {
     border-bottom: 2px solid black;
 }
 
-#tecnologias .divider:hover{
+#tecnologias .divider:hover {
     border-bottom: 2px solid #CDA434;
 }
 
 
 /* Seccion del footer*/
-.container-fluid{
+
+.container-fluid {
     background-color: black !important;
 }
 
-#footer h4{
+#footer h4 {
     font-weight: 300;
     font-size: 19px;
     color: #CDA434;
 }
 
-#footer a:hover{
+#footer a:hover {
     text-decoration: none;
 }
 
-#footer i{
+#footer i {
     color: #CDA434 !important;
     margin: 0;
 }
 
-
-#footer .divider{
+#footer .divider {
     margin: 0;
     border-bottom: 2px solid #CDA434;
-    
 }
+
 
 /* Para el carrusel*/
 
 .carousel__contenedor {
-	position: relative;
+    position: relative;
 }
 
 .carousel__anterior,
 .carousel__siguiente {
-	position: absolute;
-	display: block;
-	width: 30px;
-	height: 30px;
-	border: none;
-	top: calc(50% - 35px);
-	cursor: pointer;
-	line-height: 30px;
-	text-align: center;
-	background: none;
-	color: var(--primary);
-	opacity: 40%;
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: none;
+    top: calc(50% - 35px);
+    cursor: pointer;
+    line-height: 30px;
+    text-align: center;
+    background: none;
+    color: var(--primary);
+    opacity: 40%;
 }
 
 .carousel__anterior:hover,
 .carousel__siguiente:hover {
-	opacity: 100%;
+    opacity: 100%;
 }
 
 .carousel__anterior {
-	left: -30px;
+    left: -30px;
 }
 
 .carousel__siguiente {
-	right: -30px;
+    right: -30px;
 }
 
 .carousel__lista {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .carousel__elemento {
-	text-align: center;
+    text-align: center;
 }
 
 .carousel__indicadores .glider-dot {
-	display: block;
-	width: 30px;
-	height: 4px;
-	background:var(--primary);
-	opacity: .2;
-	border-radius: 0;
+    display: block;
+    width: 30px;
+    height: 4px;
+    background: var(--primary);
+    opacity: .2;
+    border-radius: 0;
 }
 
 .carousel__indicadores .glider-dot:hover {
@@ -265,13 +266,16 @@ span:hover{
 }
 
 .carousel__indicadores .glider-dot.active {
-	opacity: 1;
+    opacity: 1;
 }
-
 
 .contenedor {
-	max-width: 1200px !important;
-	width: 90% !important;
-	margin: auto !important;
+    max-width: 1200px !important;
+    width: 90% !important;
+    margin: auto !important;
 }
 
+ion-icon {
+    color: #CDA434 !important;
+    border-color: #CDA434 !important;
+}

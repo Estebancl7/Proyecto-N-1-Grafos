@@ -6,9 +6,9 @@
 
 #grafos .dividerg {
     border-bottom: 2px solid black;
+    margin: 0;
     margin-left: 20% !important;
     margin-right: 20% !important;
-    margin: 0;
 }
 
 #resultado {
@@ -82,6 +82,7 @@
     border-radius: 20px;
     min-height: 200px !important;
     max-width: 350px;
+    margin-right: 1% !important;
 }
 
 .border-danger:hover {
@@ -89,22 +90,14 @@
     border-radius: 20px;
     min-height: 200px !important;
     max-width: 350px;
+    margin-right: 1% !important;
 }
 
 #grafos .dividerGr {
+    margin: 0;
     border-bottom: 2px solid black;
     margin-left: 7% !important;
     margin-right: 7% !important;
-    margin: 0;
-}
-
-.border-darks {
-    border-color: var(--dark) !important;
-    border-radius: 20px;
-    min-height: 250px !important;
-    max-width: 450px;
-    /*margin-left: 30% !important;
-    margin-right: 30% !important;*/
 }
 
 .border-darks {

@@ -31,7 +31,7 @@
 
     <!-- Header-->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top p-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top p-3 aria-label">
         <div class="container">
             <a class="navbar-brand" href="index.html" style="color: #CDA434;">Grafos y Lenguajes Formales</a>
             <button class="navbar-toggler border-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,8 +80,10 @@
                         <p>
                             <em class="fas fa-check-circle"></em> Matriz de adyacencia<br>
                             <em class="fas fa-check-circle"></em> Matriz de Caminos <br>
-                            <em class="fas fa-check-circle"></em> Grafo Euleriano o Hamiltoniano <br>
-                            <em class="fas fa-check-circle"></em> Camino más rapido<br>
+                            <em class="fas fa-check-circle"></em> Grafo Euleriano y/o Hamiltoniano <br>
+                            <em class="fas fa-check-circle"></em> Camino más corto<br>
+                            <em class="fas fa-check-circle"></em> Flujo máximo <br>
+                            <em class="fas fa-check-circle"></em> Arbol Generador mediante <strong>Prim</strong><br>
                         </p>
                     </div>
                 </div>
@@ -176,7 +178,7 @@
                         </h1>
                         <h1 class="dividerg mb-4"></h1>
 
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <div class="col-4 border border-danger mt-4">
 
                                 <div class="col-12 my-2">
@@ -190,7 +192,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-4 border border-danger mt-4 mx-4">
+                            <div class="col-4 border border-danger mt-4">
                                 <div class="col-12 my-2">
                                     <h3 class="text-center">Matriz de Caminos</h3>
                                     <h1 class="dividerGr"></h1>
@@ -215,22 +217,22 @@
                         </div>
                         <!--Aca termina el primer raw-->
 
-                        <h1 class="text-center mt-5">Item b. Camino mas corto</h1>
+                        <h1 class="text-center mt-5">Item b. Camino más corto</h1>
                         <h1 class="dividerg mb-3"></h1>
                         <div class="row pb-5 justify-content-center">
 
                             <div class="col-6 border border-darks mt-4 my-2">
-                                <h3 class="text-center mt-2">Camino mas Corto</h3>
+                                <h3 class="text-center mt-2">Camino más Corto</h3>
                                 <h1 class="dividerGr"></h1>
                                 <div class="text-center marginflotante pt-3">
                                     <div class="col-5 pl-0 form-group mx-2 mt-3">
-                                        <input type="text" id="entradacamino" class="form-control mx-2 text-center" placeholder="Desde...">
+                                        <input type="text" id="entrada_camino" class="form-control mx-2 text-center" placeholder="Desde...">
                                     </div>
                                     <div class="col-5 pl-0 mx-2 mb-3">
-                                        <input type="text" id="" class="form-control mx-2 text-center" placeholder="Hasta">
+                                        <input type="text" id="salida_camino" class="form-control mx-2 text-center" placeholder="Hasta">
                                     </div>
                                 </div>
-                                <a onclick="imprimirMasCorto()" class="btn btn-outline-light mt-4 marginbtn1">Ver Resultados</a>
+                                <a onclick="Corto()" class="btn btn-outline-light mt-4 marginbtn1">Ver Resultados</a>
                                 <div class="row justify-content-center">
                                     <div id="caminoCorto" class="pt-4 pb-2"></div>
                                 </div>
@@ -270,20 +272,20 @@
 
                         </div>
 
-                        <h1 class="text-center mt-0">Item D. Flujo maximo</h1>
+                        <h1 class="text-center mt-0">Item D. Flujo máximo</h1>
                         <h1 class="dividerg mb-3"></h1>
                         <div class="row pb-5 justify-content-center">
 
                             <div class="col-6 border border-darks mt-4 my-2">
-                                <h3 class="text-center mt-2">Flujo Maximo</h3>
+                                <h3 class="text-center mt-2">Flujo Máximo</h3>
                                 <h1 class="dividerGr"></h1>
                                 <div class="text-center marginflotante">
                                     <div class="col-5 pl-0 form-group mx-2 mt-3">
-                                        <i class="justify-content-center">Entrada </i>
+                                        <em class="justify-content-center">Entrada </em>
                                         <input type="text" id="entrada_flujo" class="form-control mx-2 text-center" placeholder="Desde vertice">
                                     </div>
                                     <div class="col-5 pl-0 mx-2 mb-3">
-                                        <i>Salida </i>
+                                        <em>Salida </em>
                                         <input type="text" id="salida_flujo" class="form-control mx-2 text-center" placeholder="hasta vertice">
                                     </div>
 
@@ -299,16 +301,20 @@
                         </div>
 
                         
-                        <h1 class="text-center mt-0">Item e. Arbol Generador</h1>
+                        <h1 class="text-center mt-0">Item e. Árbol Generador</h1>
                         <h1 class="dividerg"></h1>
                         <div class="row pb-5 justify-content-center">
                             <div class="col-6 border border-darks mt-4 my-2">
                             
                                 <h3 class="text-center mt-2">Mediante Prim</h3>
-                                <h1 class="dividerGr mb-3"></h1>
-
-    
+                                <h1 class="dividerGr mb-4"></h1>
+                                <div id="popAlertprim"></div>
+                                <a onclick="imprimirPrim()" id="inicioFlujo" class="btn btn-outline-light mt-1 marginbtn1 mb-3">Ver Resultados</a>
+                                <div id="algoritmoPrim"></div>
+                                <div id="aPrim"></div>
+                                <div class="resultadosPrim"></div>
                                 </div>
+                                
                             </div>
                         </div>
 
@@ -329,7 +335,7 @@
 
 
     <section id="footer">
-        <nav class="container-fluid p-2">
+        <nav class="container-fluid p-2 aria-label">
             <div class="container">
                 <div class="content-center">
                     <div class="row my-1">
@@ -340,7 +346,7 @@
                         </div>
                     </div>
                     <h1 class="divider mx-5"></h1>
-                    <h4 class="text-center"> Universidad Tecnológica Metropolitana | Desarrollado por: Grupo 5</h4>
+                    <h4 class="text-center"> Universidad Tecnológica Metropolitana | Desarrollado por: Grupo 3</h4>
                 </div>
             </div>
         </nav>
